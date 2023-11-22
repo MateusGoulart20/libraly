@@ -24,6 +24,8 @@ class CartService with ChangeNotifier {
   
 }
 
+Stream<QuerySnapshot> collectionItem = _firestore.collection('item').snapshots();
+
 class Grid extends StatelessWidget {
   Widget build(BuildContext context){
     return StreamBuilder(

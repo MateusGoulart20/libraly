@@ -15,6 +15,8 @@ class CartItem {
 
   CartItem({this.name, this.price});
 }
+
+
 /*
   Future<List<CartItem>> getItems() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -29,7 +31,7 @@ class CartItem {
 
     return items;
   }
-/*/
+*/
 //*
   List<CartItem> getItems(){
   return [
