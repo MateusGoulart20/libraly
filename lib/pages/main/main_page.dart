@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/pages/cart/cart_page.dart';
 import 'package:flutter_application/pages/home/home_page.dart';
+import 'package:flutter_application/pages/order/order_page.dart';
 import 'package:flutter_application/pages/userprofile/user_profile_page.dart';
 //import 'package:provider/provider.dart';
 
@@ -35,9 +36,9 @@ class _MainPageState extends State<MainPage> {
             children: [Text("Página inicial")],
           ),
         ),*/
-        HomePage(),
+        const HomePage(),
         const CartPage(),
-        
+        const OrderPage(),
         /*
         Center(
           child: Column(
@@ -47,7 +48,7 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ),*/
-        Center(
+        /*Center(
           child: Container(
             color: Colors.orange,
             child: const Column(
@@ -57,7 +58,7 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-        ),
+        ),*/
         const UserProfilePage(),
       ][_index],
       bottomNavigationBar: NavigationBar(

@@ -85,21 +85,25 @@ class _ListingState extends State<Listing> {
         // Divida a string por vírgulas
         List<String> palavras = valor.split(',');
 
-        // Verifique se pelo menos uma palavra está presente na lista de filtros
-        return palavras.any((palavra) => filtro.contains(palavra.trim()));
+        // Verifique se todos os itens do filtro estão presentes na lista de palavras
+        return filtro.every((item) => palavras.contains(item.trim()));
       }
 
       return StreamBuilder<QuerySnapshot>(
         stream: collectionItem,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           List<Widget> gridItems = [];
-          snapshot.data!.docs.forEach((DocumentSnapshot document) {
+
+          for (var document in snapshot.data!.docs) {
             Map<String, dynamic> data =
                 document.data()! as Map<String, dynamic>;
             bool isVisible = filtragem(data['tipo']);
             CartItem atual = CartItem(
-                name: data['name'], price: data['price'], tipo: data['tipo'], qtd: 0);
-            // Adiciona o Card se atender à condição
+                name: data['name'],
+                price: data['price'],
+                tipo: data['tipo'],
+                qtd: 0);
+
             if (isVisible) {
               gridItems.add(Card(
                 child: GridTile(
@@ -127,11 +131,21 @@ class _ListingState extends State<Listing> {
                             context.read<CartService>().addToCart(atual);
                           },
                         ),
-                        Text(carrinho.indexOf(atual) > -1 ? '1' : '0'),
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(255, 255, 29, 153),
+                          ),
+                          child: Text(
+                            context.read<CartService>().contagem(atual).toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
                         IconButton(
                           icon: const Icon(Icons.remove_circle),
                           onPressed: () {
-                            context.read<CartService>().removeFromCart(atual);
+                            context.read<CartService>().removeItemCart(atual);
                           },
                         ),
                       ],
@@ -147,7 +161,8 @@ class _ListingState extends State<Listing> {
                 ),
               ));
             }
-          });
+          }
+
           return GridView.count(
             crossAxisCount: 5,
             children: gridItems,

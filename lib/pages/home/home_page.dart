@@ -1,16 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/cart/cart_item.dart';
-import 'package:flutter_application/pages/cart/cart_page.dart';
 import 'package:flutter_application/pages/home/lister.dart';
 import 'package:flutter_application/services/cart/cart_service.dart';
 import 'package:flutter_application/pages/home/filter.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key /*, this.title*/});
+  const HomePage({super.key /*, this.title*/});
   //final String? title;
-  List<String> filtro = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.yellow.shade100,
-              child: Listing(filtroInincial: []),
+              child: const Listing(filtroInincial: []),
             ),
           ),
         ],
@@ -47,13 +43,14 @@ class HomePage extends StatelessWidget {
       floatingActionButton: cart.isEmpty
           ? null
           : FloatingActionButton.extended(
-              onPressed: () {
+            onPressed: (){},
+              /*onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const CartPage(),
+                    builder: (context) => CartPage(),
                   ),
                 );
-              },
+              },*/
               label: Row(
                 children: [
                   Container(

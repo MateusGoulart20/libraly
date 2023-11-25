@@ -2,6 +2,20 @@
 
 List<CartItem> listChart = [];
 
+extension CartItemListExtension on List<CartItem> {
+  double total() {
+    double total = 0;
+    forEach((item) {
+      total += item.price!;
+    });
+    return total;
+  }
+
+  List<CartItem> instanciar(List<CartItem> a){
+    List<CartItem> e = a;
+    return e;
+  }
+}
 class CartItem {
   final String? name;
   final double? price;
@@ -10,6 +24,7 @@ class CartItem {
 
   CartItem({this.name, this.price, this.tipo, this.qtd});
 }
+
 
 List<CartItem> getItems(){
   return [

@@ -8,6 +8,7 @@ import 'package:flutter_application/pages/main/main_page.dart';
 import 'package:flutter_application/pages/userprofile/user_profile_edit_page.dart';
 import 'package:flutter_application/pages/userprofile/user_profile_page.dart';
 import 'package:flutter_application/services/cart/filter_service.dart';
+import 'package:flutter_application/services/cart/pedido_service.dart';
 import 'package:flutter_application/services/users/users_services.dart';
 import 'package:flutter_application/services/cart/cart_service.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -42,11 +43,15 @@ class MyApp extends StatelessWidget {
           lazy: false,
         ),
         ChangeNotifierProvider(
-          create: (_) => CartService(),
+          create: (_) => CartService.instanciar(),
           lazy: false,
         ),
         ChangeNotifierProvider(
-          create: (context) => FilterService(),
+          create: (_) => FilterService(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PedidoService.instanciar(),
           lazy: false,
         ),
       ],
