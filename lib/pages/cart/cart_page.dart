@@ -13,30 +13,34 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     var cart = context.watch<CartService>().cart;
-
+    double total =0;
+    //for (var cartItem in cart) {total += cartItem.price!;}
     return Scaffold(
-      //builder: (context, CartService, child) {
-      body: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Consumer<CartService>(
-          builder: (context, cartService, child) {
-            return ListView(
-              children: cart.map(
-                (e) => ListTile(
-                title: Text(e.name ?? ''),
-                subtitle: Text("USD ${e.price ?? ''}"),
-                trailing: IconButton(
-                  icon: const Icon(Icons.remove_circle),
-                  onPressed: () {
-                    context.read<CartService>().removeFromCart(e);
-                  },
-                ),
-                ),
-              ).toList()
-            );
-          }
-        )
-      )
-    );
+        //builder: (context, CartService, child) {
+        body: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child:
+                Consumer<CartService>(builder: (context, cartService, child) {
+              return Column(
+                children: [
+                  ListView(
+                      children: cart
+                          .map(
+                            (e) => ListTile(
+                              title: Text(e.name ?? ''),
+                              subtitle: Text("USD ${e.price ?? ''}"),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.remove_circle),
+                                onPressed: () {
+                                  context.read<CartService>().removeFromCart(e);
+                                },
+                              ),
+                            ),
+                          )
+                          .toList()),
+                    Text('Total: R\$${total}}')
+                ],
+              );
+            })));
   }
 }

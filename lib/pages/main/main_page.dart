@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         //backgroundColor: Color(0xFFFF00FF),
         elevation: 2.0,
-        title: const Text("Loja Roupas"),
+        title: const Text("Fashion Moda"),
       ),
       body: [
         /*const Center(
@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
             children: [Text("Página inicial")],
           ),
         ),*/
-        const HomePage(),
+        HomePage(),
         const CartPage(),
         
         /*

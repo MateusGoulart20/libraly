@@ -48,7 +48,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         MaterialState.focused,
       };
       if (states.any(interactiveStates.contains)) {
-        return Colors.tealAccent.shade400;
+        return Colors.orange.shade400;
       }
       if (isChecked) {
         return Colors.purpleAccent.shade700;

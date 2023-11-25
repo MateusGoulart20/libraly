@@ -4,11 +4,11 @@ import 'package:flutter_application/models/cart/cart_item.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class CartService with ChangeNotifier {
-  final List<CartItem> _items = getItems();
+  //final List<CartItem> _items = getItems();
   //chartService.getItems() as List<CartItem>;
   final List<CartItem> _cart = [];
 
-  List<CartItem> get items => _items;
+  //List<CartItem> get items => _items;
 
   List<CartItem> get cart => _cart;
 
