@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/users/users.dart';
+import 'package:flutter_application/models/usuario/usuario.dart';
 import 'package:flutter_application/pages/authentication/login_page.dart';
 import 'package:flutter_application/pages/cart/cart_page.dart';
 import 'package:flutter_application/pages/main/main_page.dart';
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
             case '/userprofileedit':
               return MaterialPageRoute(
                   builder: (_) =>
-                      UserProfileEditPage(users: settings.arguments as Users));
+                      UserProfileEditPage(users: settings.arguments as Usuario));
             case '/cartpage':
               return MaterialPageRoute(builder: (_) => const CartPage());
           }

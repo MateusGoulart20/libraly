@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/cart/cart_item.dart';
 import 'package:flutter_application/models/pedido/pedido.dart';
 import 'package:flutter_application/services/cart/cart_service.dart';
-import 'package:flutter_application/services/users/users_services.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 class PedidoService with ChangeNotifier {
-  static final PedidoService? _instancia = PedidoService._();
+  static final PedidoService _instancia = PedidoService._();
+  CollectionReference pedidoFire = _firestore.collection('pedidos');
 
+  
   @override
   PedidoService._();
   
@@ -16,11 +16,13 @@ class PedidoService with ChangeNotifier {
     return _instancia;
   }
 
-  
+  Future<List<String>> getFire() async {
+    var snapshot = await pedidoFire.get();
+    return snapshot.docs.map((doc) => doc['item'] as String).toList();
+  }
   
   /*
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final UserServices _userService = UserServices();
+81  final UserServices _userService = UserServices();
 
   Future<List<Pedido>> getPedidosDoUsuario(String userId) async {
     try {
@@ -45,9 +47,7 @@ class PedidoService with ChangeNotifier {
   }
 
 */
-  final List<Pedido> _items = [
-    Pedido(user: 'a', items: [CartItem(name: 'Gost', price: 200)])
-  ];
+  List<Pedido> _items = [];
   List<Pedido> get items => _items;
   CartService? cartService = CartService.instanciar();
 

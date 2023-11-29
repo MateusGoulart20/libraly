@@ -66,16 +66,9 @@ class _ListingState extends State<Listing> {
     return Consumer<FilterService>(builder: (context, filterService, child) {
       List<String> filtro = filterService.items;
 
-      //List<String> filtro = context.watch<FilterService>().items;
       List<CartItem> carrinho = context.watch<CartService>().cart;
-      //bool isChecked = false;
-
-      // Função para atualizar os valores internos com base em uma nova lista.
-      //void filtrar(List<String> novaLista) {
-      // setState(() {
-      //   filtro = novaLista;
-      // });
-      //}
+      // Apesar de parecer a opção que não está sendo usada essa opção está mantendo atualizado.
+      
 
       bool filtragem(String valor) {
         if (filtro.isEmpty) {

@@ -29,7 +29,7 @@ class _OrderPageState extends State<OrderPage> {
                     margin: const EdgeInsets.all(8.0),
                     child: Row(
                         children: [
-                          Text('${e.user.toString()} ${e.items.total()}'),
+                          Text('${e.user.toString()} ${e.items.total().toStringAsFixed(2)}'),
                         ]),
                   );
                 }).toList(),

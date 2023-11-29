@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/cart/cart_item.dart';
-import 'package:flutter_application/models/pedido/pedido.dart';
 import 'package:flutter_application/services/cart/cart_service.dart';
-import 'package:flutter_application/services/cart/pedido_service.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {

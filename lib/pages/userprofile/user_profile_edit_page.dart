@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/users/users.dart';
+import 'package:flutter_application/models/usuario/usuario.dart';
 
 class UserProfileEditPage extends StatelessWidget {
   const UserProfileEditPage({this.users, super.key});
-  final Users? users;
+  final Usuario? users;
 
   @override
   Widget build(BuildContext context) {

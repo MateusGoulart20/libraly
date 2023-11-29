@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/commons/custom_textformfield.dart';
 //import 'package:flutter_application/commons/dotted_border.dart';
-import 'package:flutter_application/models/users/users.dart';
+import 'package:flutter_application/models/usuario/usuario.dart';
 import 'package:flutter_application/services/users/users_services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -173,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ElevatedButton(
                     onPressed: () async {
                       UsersServices usersServices = UsersServices();
-                      Users users = Users();
+                      Usuario users = Usuario();
                       users.email = _email.text;
                       users.userName = _userName.text;
                       users.password = _password.text;

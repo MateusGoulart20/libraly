@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/models/users/users.dart';
+import 'package:flutter_application/models/usuario/usuario.dart';
 import 'package:uuid/uuid.dart';
 
 class UsersServices extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
-  Users? users;
+  Usuario? users;
 
   DocumentReference get _firetoreRef => _firestore.doc('users/${users!.id}');
   CollectionReference get _collectionRef => _firestore.collection('users');
@@ -19,7 +19,7 @@ class UsersServices extends ChangeNotifier {
   }
 
   //Método para registrar o usuário no firebase console
-  Future<bool> signUp(Users users, dynamic imageFile, bool plat) async {
+  Future<bool> signUp(Usuario users, dynamic imageFile, bool plat) async {
     try {
       User? user = (await _auth.createUserWithEmailAndPassword(
               email: users.email!, password: users.password!))
@@ -91,10 +91,10 @@ class UsersServices extends ChangeNotifier {
     if (currentUser != null) {
       DocumentSnapshot docUser =
           await _firestore.collection('users').doc(currentUser.uid).get();
-      users = Users.fromJson(docUser);
+      users = Usuario.fromJson(docUser);
       notifyListeners();
     } else {
-      users = Users(
+      users = Usuario(
           email: 'anonimo@anonimo.com',
           id: currentUser?.uid,
           userName: 'anônimo');
