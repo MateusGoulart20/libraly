@@ -35,7 +35,7 @@ class Listagem extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text('Checkbox Sample')),
         body: const Center(
-          child: Listing(
+          child: Cruding(
             filtroInincial: [],
           ),
         ),
@@ -44,23 +44,23 @@ class Listagem extends StatelessWidget {
   }
 }
 
-class Listing extends StatefulWidget {
+class Cruding extends StatefulWidget {
   final List<String> filtroInincial;
   //final String nomeTipo;
   // Callback para notificar mudança
   //final Function(bool) onCheckboxChanged;
 
-  const Listing({
+  const Cruding({
     super.key,
     required this.filtroInincial,
     /*required this.nomeTipo, required this.onCheckboxChanged*/
   });
 
   @override
-  State<Listing> createState() => _ListingState();
+  State<Cruding> createState() => _ListingState();
 }
 
-class _ListingState extends State<Listing> {
+class _ListingState extends State<Cruding> {
   @override
   Widget build(BuildContext context) {
     return Consumer<FilterService>(builder: (context, filterService, child) {
@@ -119,26 +119,15 @@ class _ListingState extends State<Listing> {
                         Text('R\$ ${data['price']}'),
                         const Spacer(),
                         IconButton(
-                          icon: const Icon(Icons.add_circle),
+                          icon: const Icon(Icons.edit),
                           onPressed: () {
-                            context.read<CartService>().addToCart(atual);
+                            showEditDialog(context, document);
                           },
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color.fromARGB(255, 255, 29, 153),
-                          ),
-                          child: Text(
-                            context.read<CartService>().contagem(atual).toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
                         IconButton(
-                          icon: const Icon(Icons.remove_circle),
+                          icon: const Icon(Icons.delete),
                           onPressed: () {
-                            context.read<CartService>().removeItemCart(atual);
+                            showDeleteDialog(context, document);
                           },
                         ),
                       ],
@@ -157,7 +146,7 @@ class _ListingState extends State<Listing> {
           }
 
           return GridView.count(
-            crossAxisCount: 4,
+            crossAxisCount: 5,
             children: gridItems,
           );
         },
@@ -165,4 +154,86 @@ class _ListingState extends State<Listing> {
       // Stream Builder
     });
   }
+}
+
+void showEditDialog(BuildContext context, DocumentSnapshot document) async {
+  TextEditingController nomeController = TextEditingController(text: document['name']);
+  TextEditingController tipoController = TextEditingController(text: document['tipo']);
+  TextEditingController descricaoController = TextEditingController(text: document['price'].toString());
+
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Editar Produto'),
+        content: Column(
+          children: [
+            TextField(
+              controller: nomeController,
+              decoration: const InputDecoration(labelText: 'Nome'),
+            ),
+            TextField(
+              controller: descricaoController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              decoration: const InputDecoration(labelText: 'Descrição'),
+            ),
+            TextField(
+              controller: tipoController,
+              decoration: const InputDecoration(labelText: 'Tipos'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Fechar o diálogo
+            },
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Implementar lógica de atualização no Firebase
+              document.reference.update({
+                'name': nomeController.text,
+                'tipo': tipoController.text,
+                'price': double.parse(descricaoController.text),
+              });
+
+              Navigator.of(context).pop(); // Fechar o diálogo
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void showDeleteDialog(BuildContext context, DocumentSnapshot document) async {
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirmar Exclusão'),
+        content: Text('Tem certeza de que deseja excluir este item?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Fechar o diálogo
+            },
+            child: Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Implementar lógica de exclusão no Firebase
+              document.reference.delete();
+
+              Navigator.of(context).pop(); // Fechar o diálogo
+            },
+            child: Text('Excluir'),
+          ),
+        ],
+      );
+    },
+  );
 }

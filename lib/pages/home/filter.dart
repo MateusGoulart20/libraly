@@ -84,6 +84,16 @@ class _ClothingOptionsPanelState extends State<ClothingOptionsPanel> {
             onCheckboxChanged: (bool isChecked) {
               updateSelectedOptions('Saia', isChecked);
             },
+          ),CheckboxExample(
+            nomeTipo: 'Social',
+            onCheckboxChanged: (bool isChecked) {
+              updateSelectedOptions('Social', isChecked);
+            },
+          ),CheckboxExample(
+            nomeTipo: 'Frio',
+            onCheckboxChanged: (bool isChecked) {
+              updateSelectedOptions('Frio', isChecked);
+            },
           ),
           //SizedBox(height: 16),
           //Text('Opções selecionadas: ${selectedOptions.join(', ')}'),

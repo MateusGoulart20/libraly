@@ -53,6 +53,7 @@ class PedidoService with ChangeNotifier {
 
   void addPedido(Pedido item) {
     _items.add(Pedido (user: item.user, items: item.items));
+    
     //cartService?.finalizarCompra();
     //context.read<CartService>().finalizarCompra()
     notifyListeners();

@@ -3,6 +3,7 @@ import 'package:flutter_application/pages/cart/cart_page.dart';
 import 'package:flutter_application/pages/home/home_page.dart';
 import 'package:flutter_application/pages/order/order_page.dart';
 import 'package:flutter_application/pages/userprofile/user_profile_page.dart';
+import 'package:flutter_application/pages/cud/cud_page.dart';
 //import 'package:provider/provider.dart';
 
 
@@ -30,35 +31,10 @@ class _MainPageState extends State<MainPage> {
         title: const Text("Fashion Moda"),
       ),
       body: [
-        /*const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Página inicial")],
-          ),
-        ),*/
         const HomePage(),
         const CartPage(),
         const OrderPage(),
-        /*
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Carrinho de Compras'),
-            ],
-          ),
-        ),*/
-        /*Center(
-          child: Container(
-            color: Colors.orange,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Galeria de Produtos'),
-              ],
-            ),
-          ),
-        ),*/
+        const CudPage(),
         const UserProfilePage(),
       ][_index],
       bottomNavigationBar: NavigationBar(
@@ -78,8 +54,12 @@ class _MainPageState extends State<MainPage> {
               label: 'Carrinho',
             ),
             NavigationDestination(
-              icon: Icon(Icons.line_style_outlined),
+              icon: Icon(Icons.list),
               label: 'Pedidos',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.cloud_upload_rounded),
+              label: 'CUD',
             ),
             NavigationDestination(
               icon: Icon(Icons.account_box_outlined),
